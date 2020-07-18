@@ -9,7 +9,6 @@ ghost.py==0.1b3
 httpbin==0.2.1
 imapclient==0.13.0
 jsonrpclib-pelix==0.2.5
-lxml==3.3.3
 paramiko==1.15.2
 pygeocoder==1.2.5
 python3-memcached==1.51
@@ -19,3 +18,4 @@ rpyc==3.3.0
 selenium==2.47.1
 webob
 werkzeug
+lxml

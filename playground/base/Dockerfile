@@ -1,18 +1,23 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 RUN apt-get update
+RUN apt-get install sudo
+RUN apt-get install --assume-yes apt-utils
 RUN apt-get install -y lsof man-db mtr nmap openssh-server strace traceroute
 RUN apt-get install -y bind9-host curl dnsutils ftp telnet tcpdump zlib1g-dev
-RUN apt-get install -y python-dev python3-dev python-pip python3-pip
+RUN apt-get install -y python3 python-dev python3-dev
+RUN apt-get install -y build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev
+RUN apt-get install -y python-pip python3-pip
 RUN apt-get install -y python-crypto python-cssselect python-lxml python-zmq
 RUN apt-get install -y python3-crypto python3-lxml python3-zmq
 
 # Install all third-party Python packages used in the book
 
-ADD requirements2.txt /root/requirements2.txt
-RUN pip install -r /root/requirements2.txt
-
+#ADD requirements2.txt /root/requirements2.txt
+#RUN pip install -r /root/requirements2.txt
+RUN pip install --upgrade pip
+RUN pip3 install --upgrade pip
 ADD requirements.txt /root/requirements.txt
-RUN pip3 install -r /root/requirements.txt
+RUN pip3 install --ignore-installed -r /root/requirements.txt
 
 # Prevent SSH from prompting about unknown hosts.
 
@@ -55,7 +60,7 @@ RUN sed -i '/sudo/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
 # Prevent a minor error message from filling /var/log/auth.log from SSH:
 # "Unable to open env file: /etc/default/locale: No such file or directory"
 
-RUN update-locale
+#RUN update-locale
 
 # Run SSH by default
 

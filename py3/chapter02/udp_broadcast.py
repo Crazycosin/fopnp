@@ -3,9 +3,11 @@
 # https://github.com/brandon-rhodes/fopnp/blob/m/py3/chapter02/udp_broadcast.py
 # UDP client and server for broadcast messages on a local LAN
 
-import argparse, socket
+import argparse
+import socket
 
 BUFSIZE = 65535
+
 
 def server(interface, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -16,11 +18,14 @@ def server(interface, port):
         text = data.decode('ascii')
         print('The client at {} says: {!r}'.format(address, text))
 
+
 def client(network, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    # socket.SO_BROADCAST 选择广播的方式
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     text = 'Broadcast datagram!'
     sock.sendto(text.encode('ascii'), (network, port))
+
 
 if __name__ == '__main__':
     choices = {'client': client, 'server': server}

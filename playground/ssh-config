@@ -1,4 +1,4 @@
-IdentityFile ~/fopnp/playground/base/id_rsa
+IdentityFile ~/PycharmProjects/fopnp/playground/base/id_rsa
 StrictHostKeyChecking no
 User root
 
